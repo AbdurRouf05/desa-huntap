@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="public/logo-lumajang.png" alt="Logo Lumajang" width="120"/>
+  <img src="public/logo-lumajang-2.png" alt="Logo Lumajang" width="120"/>
 
-  # 🏡 Desa Huntap Sumbermujur
+  # Desa Huntap Sumbermujur
   
   **Platform Web Informasi dan Marketplace UMKM Terpadu untuk Kawasan Huntap (Hunian Tetap) Sumbermujur, Kecamatan Candipuro, Kabupaten Lumajang.**
 
@@ -13,31 +13,46 @@
   </p>
 </div>
 
----
+<br />
 
-## ✨ Fitur Unggulan
+> **Pemberitahuan:** Proyek ini merupakan inisiatif digitalisasi kawasan Hunian Tetap Sumbermujur pasca-erupsi Semeru, bertujuan untuk meningkatkan ekonomi masyarakat melalui teknologi yang inklusif.
 
-- 📰 **Portal Informasi Desa**: Menampilkan berita terbaru, pengumuman jadwal kegiatan (posyandu, dsb), dan profil lengkap desa.
-- 🏪 **E-Commerce UMKM Lokal**: Marketplace untuk produk asli buatan warga (kopi Semeru, rajutan, dsb) dengan sistem *Cart* yang rapi.
-- 💬 **WhatsApp Checkout & Layanan**: Terintegrasi penuh dengan API WhatsApp! Pembelian barang dan layanan surat-menyurat akan di-_generate_ menjadi pesan yang siap dikirim langsung ke Admin.
-- 🗺️ **Peta & Transparansi Data**: Profil desa, data perangkat, visi misi, serta peta terintegrasi via Google Maps.
-- 🎨 **Desain Modern & Responsif**: Dibangun dengan *Tailwind CSS* untuk memastikan pengalaman pengguna yang super mulus, responsif di HP maupun PC.
+<br />
 
-## 🚀 Teknologi yang Digunakan
+## Fitur Unggulan
 
-Proyek ini dibangun menggunakan *stack* teknologi web modern yang berfokus pada kecepatan, keamanan, dan kemudahan dalam pengembangan (Developer Experience):
+- **Portal Informasi Desa**  
+  Menampilkan berita terbaru, pengumuman jadwal kegiatan (posyandu, dsb), dan profil lengkap desa.
 
-*   [Next.js (App Router)](https://nextjs.org/) - Framework React utama.
-*   [Tailwind CSS](https://tailwindcss.com/) - Untuk styling komponen.
-*   [TypeScript](https://www.typescriptlang.org/) - Type safety.
-*   [Lucide React](https://lucide.dev/) - Kumpulan ikon vektor minimalis yang cantik.
-*   **Context API & LocalStorage** - State management khusus untuk fitur Keranjang Belanja.
+- **E-Commerce UMKM Lokal**  
+  Marketplace untuk produk asli buatan warga (kopi Semeru, rajutan, dsb) dengan sistem keranjang belanja yang praktis.
 
----
+- **WhatsApp Checkout & Layanan**  
+  Terintegrasi penuh dengan WhatsApp. Pembelian barang dan layanan surat-menyurat akan dikonversi menjadi pesan otomatis kepada Admin.
 
-## 🛠️ Instalasi & Pengembangan Lokal
+- **Peta & Transparansi Data**  
+  Profil desa, data perangkat, visi misi, serta peta terintegrasi via Google Maps.
 
-Ikuti langkah-langkah di bawah ini jika Anda ingin menjalankan proyek secara lokal di perangkat Anda:
+- **Desain Modern & Responsif**  
+  Dibangun dengan Tailwind CSS untuk memastikan pengalaman pengguna yang super mulus, responsif di handphone maupun PC.
+
+<br />
+
+## Teknologi yang Digunakan
+
+Proyek ini dibangun menggunakan arsitektur web modern yang berfokus pada kecepatan dan performa:
+
+1. **[Next.js (App Router)](https://nextjs.org/)** - Framework React utama untuk rendering yang cepat.
+2. **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first framework untuk styling antarmuka.
+3. **[TypeScript](https://www.typescriptlang.org/)** - Menjaga keamanan tipe data (Type safety).
+4. **[Lucide React](https://lucide.dev/)** - Kumpulan ikon vektor minimalis.
+5. **Context API & LocalStorage** - Manajemen status khusus untuk fitur keranjang belanja.
+
+<br />
+
+## Instalasi & Pengembangan Lokal
+
+Ikuti panduan berikut jika Anda ingin menjalankan proyek secara lokal:
 
 **1. Clone Repository**
 ```bash
@@ -46,7 +61,6 @@ cd desa-huntap
 ```
 
 **2. Install Dependencies (menggunakan `pnpm`)**
-Pastikan Anda sudah menginstal `pnpm`.
 ```bash
 pnpm install
 ```
@@ -55,13 +69,13 @@ pnpm install
 ```bash
 pnpm dev
 ```
-Buka browser dan akses [http://localhost:3000](http://localhost:3000) (atau port yang diberikan di terminal).
+Akses server lokal Anda di [http://localhost:3000](http://localhost:3000).
 
----
+<br />
 
-## 📂 Struktur Direktori Utama
+## Struktur Direktori Utama
 
-```
+```text
 desa-huntap/
 ├── app/                  # Rute dan halaman Next.js App Router
 │   ├── berita/           # Halaman daftar & detail Berita
@@ -79,15 +93,15 @@ desa-huntap/
 │   └── toko/             # Komponen khusus e-commerce (CartDrawer)
 ├── lib/                  # Utility & konfigurasi
 │   ├── config.ts         # Konfigurasi website & medsos
-│   ├── dummy-data.ts     # Data dummy untuk keperluan dev frontend
-│   ├── utils.ts          # Utility functions (cn, formatRupiah, dll)
-│   └── wa-link.ts        # Generator link WhatsApp dinamis
+│   ├── dummy-data.ts     # Data dummy frontend
+│   ├── utils.ts          # Helper functions (cn, formatRupiah, dll)
+│   └── wa-link.ts        # Generator link WhatsApp
 ├── public/               # Asset statis (logo, gambar, dll)
 └── types/                # Definisi TypeScript Interfaces
 ```
 
----
+<br />
 
 <div align="center">
-  <p><i>Dibuat dengan ❤️ untuk kemajuan UMKM dan Digitalisasi Desa Huntap Sumbermujur.</i></p>
+  <img src="https://img.shields.io/badge/Dibuat_Untuk-Desa_Sumbermujur-10B981?style=for-the-badge" alt="Dibuat Untuk Sumbermujur" />
 </div>
