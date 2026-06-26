@@ -5,6 +5,7 @@ import { Clock, ChevronRight, Newspaper, Eye } from "lucide-react";
 import { newsService } from "@/lib/services/news.service";
 import { newsCategoryService } from "@/lib/services/news-category.service";
 import { formatDate } from "@/lib/utils";
+import { PB_URL } from "@/lib/pocketbase";
 
 export const metadata: Metadata = {
   title: "Berita & Pengumuman",
@@ -103,7 +104,7 @@ export default async function BeritaPage({ searchParams }: { searchParams: Promi
                 filteredNews.map((news) => {
                   const categoryName = news.expand?.category?.name || "Uncategorized";
                   const imageUrl = news.thumbnail
-                    ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=600x400f`
+                    ? `${PB_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=600x400f`
                     : null;
 
                   return (
