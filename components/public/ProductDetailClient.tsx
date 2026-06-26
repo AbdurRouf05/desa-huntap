@@ -1,5 +1,6 @@
 "use client";
 
+import { PB_URL } from '@/lib/pocketbase';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -239,7 +240,7 @@ export function ProductDetailClient({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {relatedProducts.map((p) => {
                 const relImageUrl = p.images && p.images.length > 0
-                  ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${p.collectionId}/${p.id}/${p.images[0]}?thumb=400x400f`
+                  ? `${PB_URL}/api/files/${p.collectionId}/${p.id}/${p.images[0]}?thumb=400x400f`
                   : null;
 
                 return (

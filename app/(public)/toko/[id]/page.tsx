@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import { notFound } from "next/navigation";
 import { productService } from "@/lib/services/product.service";
 import { ProductDetailClient } from "@/components/public/ProductDetailClient";
@@ -32,7 +33,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const relatedProducts = result.items.filter((p) => p.id !== product.id).slice(0, 4);
 
   const imageUrls = product.images?.map(img => 
-    `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${product.collectionId}/${product.id}/${img}`
+    `${PB_URL}/api/files/${product.collectionId}/${product.id}/${img}`
   ) || [];
 
   return (

@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import Link from "next/link";
 import { Plus, Search, Edit, Trash2, Store, Star } from "lucide-react";
 import { productService } from "@/lib/services/product.service";
@@ -86,7 +87,7 @@ export default async function TokoPage({
                 </tr>
               ) : data.items.map((product) => {
                 const imageUrl = product.images && product.images.length > 0 
-                  ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${product.collectionId}/${product.id}/${product.images[0]}?thumb=100x100` 
+                  ? `${PB_URL}/api/files/${product.collectionId}/${product.id}/${product.images[0]}?thumb=100x100` 
                   : null;
 
                 return (

@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import { Upload, Trash2, Search, Image as ImageIcon } from "lucide-react";
 import { galleryService } from "@/lib/services/gallery.service";
 
@@ -59,7 +60,7 @@ export default async function GaleriPage({
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredData.map((img) => {
-              const imageUrl = `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${img.collectionId}/${img.id}/${img.image}`;
+              const imageUrl = `${PB_URL}/api/files/${img.collectionId}/${img.id}/${img.image}`;
               return (
                 <div key={img.id} className="group relative aspect-square rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
                   <img src={imageUrl} alt={img.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />

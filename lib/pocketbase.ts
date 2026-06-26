@@ -1,8 +1,7 @@
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase(
-  process.env.NEXT_PUBLIC_POCKETBASE_URL || "https://db-huntap.sagamuda.id"
-);
+export const PB_URL = process.env.NEXT_PUBLIC_POCKETBASE_URL || "https://db-huntap.sagamuda.id";
+const pb = new PocketBase(PB_URL);
 
 // Disable auto-cancellation so multiple requests can run simultaneously
 pb.autoCancellation(false);

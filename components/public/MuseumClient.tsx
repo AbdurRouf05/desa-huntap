@@ -1,5 +1,6 @@
 "use client";
 
+import { PB_URL } from '@/lib/pocketbase';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -61,7 +62,7 @@ export function MuseumClient({ items }: { items: MuseumItem[] }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {items.map((item) => {
                         const imageUrl = item.image
-                            ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.image}?thumb=600x400f`
+                            ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${item.image}?thumb=600x400f`
                             : null;
 
                         return (

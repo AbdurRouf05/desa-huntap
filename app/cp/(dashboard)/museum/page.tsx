@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import Link from "next/link";
 import { Plus, Search, Edit, Trash2, QrCode } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -77,7 +78,7 @@ export default async function MuseumAdminPage({
                             ) : (
                                 data.map((item, index) => {
                                     const imageUrl = item.image
-                                      ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.image}?thumb=100x100` 
+                                      ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${item.image}?thumb=100x100` 
                                       : null;
 
                                     return (

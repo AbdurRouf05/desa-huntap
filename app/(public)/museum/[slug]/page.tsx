@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import { notFound } from "next/navigation";
 import { museumService } from "@/lib/services/museum.service";
 import { MuseumDetailClient } from "@/components/public/MuseumDetailClient";
@@ -28,7 +29,7 @@ export default async function MuseumItemDetailPage({ params }: { params: Promise
   }
 
   const imageUrl = item.image
-    ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.image}`
+    ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${item.image}`
     : null;
 
   return <MuseumDetailClient item={item} imageUrl={imageUrl} />;

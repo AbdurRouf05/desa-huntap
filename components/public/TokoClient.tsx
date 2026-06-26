@@ -1,5 +1,6 @@
 "use client";
 
+import { PB_URL } from '@/lib/pocketbase';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -93,7 +94,7 @@ export function TokoClient({ products, categories }: { products: Product[], cate
                 const storeName = product.expand?.store?.name || "Toko UMKM";
                 const storeId = product.store;
                 const imageUrl = product.images && product.images.length > 0
-                  ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${product.collectionId}/${product.id}/${product.images[0]}?thumb=400x400f`
+                  ? `${PB_URL}/api/files/${product.collectionId}/${product.id}/${product.images[0]}?thumb=400x400f`
                   : null;
 
                 return (

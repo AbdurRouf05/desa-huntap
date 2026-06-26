@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -150,7 +151,7 @@ function FeaturedStores({ stores }: { stores: any[] }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stores.map((store) => {
             const imageUrl = store.avatar
-              ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${store.collectionId}/${store.id}/${store.avatar}?thumb=300x300f`
+              ? `${PB_URL}/api/files/${store.collectionId}/${store.id}/${store.avatar}?thumb=300x300f`
               : null;
 
             return (
@@ -230,7 +231,7 @@ function LatestNews({ newsList }: { newsList: any[] }) {
         <div className="grid md:grid-cols-3 gap-6">
           {newsList.map((news) => {
             const imageUrl = news.thumbnail
-              ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=600x400f`
+              ? `${PB_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=600x400f`
               : null;
 
             return (

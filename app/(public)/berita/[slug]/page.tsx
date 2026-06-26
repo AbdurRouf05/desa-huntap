@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +37,7 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
   const authorName = "Admin Desa"; // TODO: Map to actual author if available in PB
   
   const imageUrl = article.thumbnail
-    ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${article.collectionId}/${article.id}/${article.thumbnail}`
+    ? `${PB_URL}/api/files/${article.collectionId}/${article.id}/${article.thumbnail}`
     : null;
 
   const recentNewsList = await newsService.getList(1, 4);
@@ -129,7 +130,7 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
               <div className="space-y-6">
                 {recentNews.map((news) => {
                   const thumb = news.thumbnail
-                    ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=300x200f`
+                    ? `${PB_URL}/api/files/${news.collectionId}/${news.id}/${news.thumbnail}?thumb=300x200f`
                     : null;
                   
                   return (

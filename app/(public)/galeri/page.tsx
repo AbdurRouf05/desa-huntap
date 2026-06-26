@@ -1,3 +1,4 @@
+import { PB_URL } from '@/lib/pocketbase';
 import { Metadata } from "next";
 import Image from "next/image";
 import { Camera, Image as ImageIcon } from "lucide-react";
@@ -48,7 +49,7 @@ export default async function GaleriPage() {
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
               {galleryItems.map((item) => {
                 const imageUrl = item.image
-                  ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.image}`
+                  ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${item.image}`
                   : null;
 
                 return (

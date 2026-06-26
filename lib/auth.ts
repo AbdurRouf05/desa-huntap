@@ -1,5 +1,6 @@
 "use server";
 
+import { PB_URL } from '@/lib/pocketbase';
 import { cookies } from "next/headers";
 import pb from "./pocketbase";
 
@@ -45,7 +46,7 @@ export async function logoutAdmin() {
  */
 export async function getServerAuth() {
   const PocketBase = (await import("pocketbase")).default;
-  const pbInstance = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL || "https://db-huntap.sagamuda.id");
+  const pbInstance = new PocketBase(PB_URL || "https://db-huntap.sagamuda.id");
   pbInstance.autoCancellation(false);
 
   const cookieStore = await cookies();
