@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Desa Huntap Sumbermujur",
   description: "Website Resmi Desa Huntap Sumbermujur, Kecamatan Candipuro, Kabupaten Lumajang, Jawa Timur. Portal informasi desa dan marketplace produk UMKM.",
-  url: "https://desa-sumbermujur.id",
+  url: "https://desa-huntap.vercel.app",
   waAdmin: "6281234567890",
   waMessage: "Halo Admin Desa Huntap Sumbermujur!",
   kecamatan: "Candipuro",

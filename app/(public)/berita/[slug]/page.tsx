@@ -14,9 +14,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   try {
     const article = await newsService.getBySlug(slug);
+    const imageUrl = article.thumbnail 
+      ? `${PB_URL}/api/files/${article.collectionId}/${article.id}/${article.thumbnail}`
+      : null;
+
     return {
       title: article.title,
       description: article.excerpt,
+      openGraph: {
+        title: article.title,
+        description: article.excerpt,
+        images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630 }] : [],
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: article.excerpt,
+        images: imageUrl ? [imageUrl] : [],
+      }
     };
   } catch (error) {
     return { title: "Berita Tidak Ditemukan" };
