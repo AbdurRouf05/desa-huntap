@@ -29,9 +29,9 @@ export const dynamic = "force-dynamic";
 function StatsSection() {
   const stats = [
     { icon: Users, label: "Penduduk", value: desaProfile.penduduk.toLocaleString("id-ID") + " jiwa" },
-    { icon: MapPin, label: "Luas Wilayah", value: desaProfile.luasWilayah },
-    { icon: Home, label: "Jumlah RT", value: desaProfile.jumlahRT.toString() },
-    { icon: Layers, label: "Jumlah RW", value: desaProfile.jumlahRW.toString() },
+    { icon: MapPin, label: "Luas Wilayah", value: desaProfile.luas_wilayah },
+    { icon: Home, label: "Jumlah RT", value: desaProfile.jumlah_rt.toString() },
+    { icon: Layers, label: "Jumlah RW", value: desaProfile.jumlah_rw.toString() },
   ];
 
   return (
@@ -99,7 +99,7 @@ function AboutSection() {
               {desaProfile.sejarah}
             </p>
             <div className="flex flex-wrap gap-2 mb-8">
-              {desaProfile.potensi.map((item, idx) => (
+              {desaProfile.potensi.map((item: string, idx: number) => (
                 <span
                   key={idx}
                   className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-full"

@@ -3,12 +3,12 @@ import { Product, NewsArticle, GalleryItem, Perangkat, DesaProfile, ServiceItem,
 // ============================================================
 // PROFIL DESA
 // ============================================================
-export const desaProfile: DesaProfile = {
-  namaKepala: "H. Ahmad Subairi",
+export const desaProfile: any = {
+  kepala_desa: "H. Ahmad Subairi",
   penduduk: 3254,
-  luasWilayah: "12,5 km²",
-  jumlahRT: 24,
-  jumlahRW: 6,
+  luas_wilayah: "12,5 km²",
+  jumlah_rt: 24,
+  jumlah_rw: 6,
   sejarah:
     "Desa Huntap Sumbermujur merupakan hunian tetap yang dibangun pasca erupsi Gunung Semeru pada tahun 2021. Desa ini awalnya merupakan bagian dari relokasi warga terdampak bencana alam yang kemudian berkembang menjadi komunitas mandiri dengan semangat gotong royong yang tinggi. Sumber daya alam yang melimpah, terutama dari sektor pertanian dan perkebunan, menjadi penopang utama perekonomian warga.",
   visi: "Mewujudkan Desa Huntap Sumbermujur yang mandiri, sejahtera, dan berbudaya melalui pemberdayaan masyarakat dan pengelolaan sumber daya alam yang berkelanjutan.",
@@ -31,7 +31,7 @@ export const desaProfile: DesaProfile = {
 // ============================================================
 // PERANGKAT DESA
 // ============================================================
-export const perangkatDesa: Perangkat[] = [
+export const perangkatDesa: any[] = [
   { id: "1", name: "H. Ahmad Subairi", position: "Kepala Desa", photo: "/images/perangkat/kepala-desa.jpg" },
   { id: "2", name: "Siti Aminah, S.Pd", position: "Sekretaris Desa", photo: "/images/perangkat/sekdes.jpg" },
   { id: "3", name: "Bambang Sutrisno", position: "Kaur Keuangan", photo: "/images/perangkat/kaur-keuangan.jpg" },
@@ -45,7 +45,7 @@ export const perangkatDesa: Perangkat[] = [
 // ============================================================
 // UMKM STORES
 // ============================================================
-export const dummyUmkmStores: UmkmStore[] = [
+export const dummyUmkmStores: any[] = [
   {
     id: "umkm-001",
     name: "Warung Pak Suroso",
@@ -123,7 +123,7 @@ export const dummyUmkmStores: UmkmStore[] = [
 // ============================================================
 // PRODUK UMKM
 // ============================================================
-export const dummyProducts: Product[] = [
+export const dummyProducts: any[] = [
   {
     id: "prod-001",
     name: "Kopi Robusta Premium Semeru",
@@ -252,7 +252,7 @@ export const dummyProducts: Product[] = [
 // BERITA & ARTIKEL
 // ============================================================
 
-export const dummyNewsCategories: NewsCategory[] = [
+export const dummyNewsCategories: any[] = [
   { id: "cat-1", slug: "kegiatan", name: "Kegiatan Desa", isActive: true },
   { id: "cat-2", slug: "berita", name: "Berita", isActive: true },
   { id: "cat-3", slug: "pengumuman", name: "Pengumuman", isActive: true },
@@ -262,7 +262,7 @@ export const dummyNewsCategories: NewsCategory[] = [
 // ============================================================
 // BERITA & PENGUMUMAN
 // ============================================================
-export const dummyNews: NewsArticle[] = [
+export const dummyNews: any[] = [
   {
     id: "news-000",
     title: "Semarak Tradisi Grebeg Suro dan Ruwat Air Hutan Bambu Sumbermujur",
@@ -379,7 +379,7 @@ export const dummyNews: NewsArticle[] = [
 // ============================================================
 // GALERI
 // ============================================================
-export const dummyGallery: GalleryItem[] = [
+export const dummyGallery: any[] = [
   { id: "gal-001", title: "Pemandangan Sawah Desa", imageUrl: "/images/galeri/sawah.jpg", album: "Wisata", createdAt: "2026-04-01" },
   { id: "gal-002", title: "Balai Desa Sumbermujur", imageUrl: "/images/galeri/balai-desa.jpg", album: "Infrastruktur", createdAt: "2026-04-05" },
   { id: "gal-003", title: "Kegiatan Posyandu", imageUrl: "/images/galeri/posyandu.jpg", album: "Kegiatan", createdAt: "2026-04-10" },
@@ -394,7 +394,7 @@ export const dummyGallery: GalleryItem[] = [
 // ============================================================
 // LAYANAN PUBLIK
 // ============================================================
-export const layananPublik: ServiceItem[] = [
+export const layananPublik: any[] = [
   {
     id: "lay-001",
     title: "Surat Keterangan Domisili",
@@ -450,7 +450,7 @@ export const productCategories = [
 // ============================================================
 // MUSEUM DESA
 // ============================================================
-export const dummyMuseumItems: MuseumItem[] = [
+export const dummyMuseumItems: any[] = [
   {
     id: "museum-001",
     name: "Sepeda Onthel Saksi Erupsi",

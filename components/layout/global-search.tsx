@@ -213,14 +213,14 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                           </div>
                           <div>
                             <p className="font-bold text-slate-700 group-hover:text-primary transition-colors line-clamp-1">Toko: {s.name}</p>
-                            <p className="text-xs text-slate-500">Milik {s.ownerName}</p>
+                            <p className="text-xs text-slate-500">Milik {s.owner_name}</p>
                           </div>
                         </div>
                         <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary shrink-0" />
                       </Link>
                     ))}
                     {results.products.map(p => {
-                      const store = dummyUmkmStores.find(s => s.id === p.storeId);
+                      const store = dummyUmkmStores.find(s => s.id === p.store);
                       return (
                         <Link
                           key={p.id}

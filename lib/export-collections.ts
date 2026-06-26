@@ -1,4 +1,4 @@
-import pb from "./pocketbase.ts";
+import pb from "./pocketbase";
 
 async function exportCollections() {
   try {

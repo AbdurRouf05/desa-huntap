@@ -83,7 +83,7 @@ export default async function PemilikUmkmPage({
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-slate-900 font-medium">{store.owner_phone}</div>
+                    <div className="text-slate-900 font-medium">{store.phone}</div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-slate-600 truncate max-w-[200px]" title={store.address}>

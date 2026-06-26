@@ -90,7 +90,7 @@ export default async function BeritaPage({
                                             <div className="flex flex-col gap-1">
                                                 <div className="flex items-center gap-2">
                                                     <span className="text-[9px] font-black text-slate-300 uppercase w-10">Penulis:</span>
-                                                    <span className="text-xs font-bold text-slate-700">{item.expand?.author?.name || "Admin"}</span>
+                                                    <span className="text-xs font-bold text-slate-700">{item.author || "Admin"}</span>
                                                 </div>
                                             </div>
                                         </td>

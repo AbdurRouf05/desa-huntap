@@ -56,7 +56,7 @@ async function run() {
         const webpBuffer = await convertFileToWebpBuffer(imagePath);
         if (webpBuffer) {
           const formData = new FormData();
-          formData.append('image', new Blob([webpBuffer]), `${item.slug}.webp`);
+          formData.append('image', new Blob([webpBuffer as any]), `${item.slug}.webp`);
           await pb.collection('museum_items').update(item.id, formData);
           console.log(`Updated museum item: ${item.name} with custom WebP`);
         }
@@ -72,7 +72,7 @@ async function run() {
         const webpBuffer = await downloadAndConvertToWebp(url);
         if (webpBuffer) {
           const formData = new FormData();
-          formData.append('image', new Blob([webpBuffer]), 'gallery.webp');
+          formData.append('image', new Blob([webpBuffer as any]), 'gallery.webp');
           await pb.collection('gallery').update(item.id, formData);
           console.log(`Converted gallery item: ${item.title}`);
         }
@@ -88,7 +88,7 @@ async function run() {
         const webpBuffer = await downloadAndConvertToWebp(url);
         if (webpBuffer) {
           const formData = new FormData();
-          formData.append('thumbnail', new Blob([webpBuffer]), 'thumbnail.webp');
+          formData.append('thumbnail', new Blob([webpBuffer as any]), 'thumbnail.webp');
           await pb.collection('news').update(item.id, formData);
           console.log(`Converted news item: ${item.title}`);
         }
@@ -110,7 +110,7 @@ async function run() {
                 const url = pb.files.getUrl(item, imgName);
                 const webpBuffer = await downloadAndConvertToWebp(url);
                 if (webpBuffer) {
-                   newFormData.append('images', new Blob([webpBuffer]), `product_${i}.webp`);
+                   newFormData.append('images', new Blob([webpBuffer as any]), `product_${i}.webp`);
                 }
             }
         }

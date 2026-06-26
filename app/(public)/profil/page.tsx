@@ -75,7 +75,7 @@ export default function ProfilPage() {
                 <h2 className="text-2xl font-black text-slate-800">Misi</h2>
               </div>
               <ol className="space-y-3">
-                {desaProfile.misi.map((item, idx) => (
+                {desaProfile.misi.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-3">
                     <span className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs shrink-0 mt-0.5">
                       {idx + 1}
@@ -97,7 +97,7 @@ export default function ProfilPage() {
             <h2 className="text-3xl font-black text-slate-800 mt-2">Potensi Unggulan Desa</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {desaProfile.potensi.map((item, idx) => {
+            {desaProfile.potensi.map((item: string, idx: number) => {
               const Icon = potensiIcons[idx % potensiIcons.length];
               return (
                 <div
@@ -124,10 +124,10 @@ export default function ProfilPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Luas Wilayah", value: desaProfile.luasWilayah },
+              { label: "Luas Wilayah", value: desaProfile.luas_wilayah },
               { label: "Jumlah Penduduk", value: `${desaProfile.penduduk.toLocaleString("id-ID")} jiwa` },
-              { label: "Jumlah RT", value: desaProfile.jumlahRT.toString() },
-              { label: "Jumlah RW", value: desaProfile.jumlahRW.toString() },
+              { label: "Jumlah RT", value: desaProfile.jumlah_rt.toString() },
+              { label: "Jumlah RW", value: desaProfile.jumlah_rw.toString() },
             ].map((item, idx) => (
               <div key={idx} className="bg-slate-50 rounded-2xl p-6 text-center border border-slate-100">
                 <p className="text-3xl font-black text-primary">{item.value}</p>

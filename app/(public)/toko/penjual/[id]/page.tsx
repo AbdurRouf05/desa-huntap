@@ -2,7 +2,7 @@
 
 import { use } from "react";
 import Link from "next/link";
-import { ArrowLeft, ShoppingBag, Star, MapPin, Phone, BadgeCheck } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Star, MapPin, Phone, BadgeCheck, User } from "lucide-react";
 import { dummyProducts, dummyUmkmStores } from "@/lib/dummy-data";
 import { formatRupiah } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ type Props = {
 export default function SellerProfilePage({ params }: Props) {
   const { id } = use(params);
   const store = dummyUmkmStores.find((s) => s.id === id);
-  const products = dummyProducts.filter((p) => p.sellerId === id);
+  const products = dummyProducts.filter((p) => p.store === id);
 
   if (!store) {
     notFound();
@@ -44,17 +44,17 @@ export default function SellerProfilePage({ params }: Props) {
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h1 className="text-2xl sm:text-3xl font-black text-slate-800">{store.name}</h1>
-                  {store.isVerified && (
-                    <BadgeCheck className="w-6 h-6 text-emerald-500" title="Toko Terverifikasi" />
+                  {store.is_verified && (
+                    <span title="Toko Terverifikasi">
+                      <BadgeCheck className="w-6 h-6 text-emerald-500" />
+                    </span>
                   )}
                 </div>
                 <p className="text-slate-600 mt-2 max-w-2xl">{store.description}</p>
                 <div className="flex flex-wrap gap-4 mt-4 text-sm text-slate-500 font-medium">
                   <span className="flex items-center gap-1.5">
-                    <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
-                      <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-                    </div>
-                    {store.ownerName}
+                    <User className="w-5 h-5 text-primary" />
+                    {store.owner_name}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
@@ -102,10 +102,10 @@ export default function SellerProfilePage({ params }: Props) {
                         <ShoppingBag className="w-12 h-12 text-slate-200 group-hover:text-primary/30 transition-colors" />
                       </div>
                     )}
-                    {product.discountPrice && (
+                    {product.discount_price && (
                       <div className="absolute top-3 left-3">
                         <span className="px-2.5 py-1 bg-red-500 text-white text-[10px] font-bold rounded-lg shadow-lg">
-                          {Math.round(((product.price - product.discountPrice) / product.price) * 100)}% OFF
+                          {Math.round(((product.price - product.discount_price) / product.price) * 100)}% OFF
                         </span>
                       </div>
                     )}
@@ -126,9 +126,9 @@ export default function SellerProfilePage({ params }: Props) {
                     </h3>
                     <div className="mt-2 flex items-center gap-2">
                       <span className="text-lg font-black text-primary">
-                        {formatRupiah(product.discountPrice || product.price)}
+                        {formatRupiah(product.discount_price || product.price)}
                       </span>
-                      {product.discountPrice && (
+                      {product.discount_price && (
                         <span className="text-xs text-muted line-through">
                           {formatRupiah(product.price)}
                         </span>

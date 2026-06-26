@@ -19,7 +19,7 @@ export function CartDrawer() {
     const checkoutItems = items.map((i) => ({
       name: i.product.name,
       qty: i.qty,
-      price: i.product.discountPrice || i.product.price,
+      price: i.product.discount_price || i.product.price,
     }));
     const waUrl = generateWhatsAppUrl(
       siteConfig.waAdmin,
@@ -84,7 +84,7 @@ export function CartDrawer() {
             </div>
           ) : (
             items.map((item) => {
-              const effectivePrice = item.product.discountPrice || item.product.price;
+              const effectivePrice = item.product.discount_price || item.product.price;
               return (
                 <div
                   key={item.product.id}

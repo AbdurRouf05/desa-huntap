@@ -76,8 +76,8 @@ export default async function MuseumAdminPage({
                                 </tr>
                             ) : (
                                 data.map((item, index) => {
-                                    const imageUrl = item.images && item.images.length > 0 
-                                      ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.images[0]}?thumb=100x100` 
+                                    const imageUrl = item.image
+                                      ? `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/${item.collectionId}/${item.id}/${item.image}?thumb=100x100` 
                                       : null;
 
                                     return (

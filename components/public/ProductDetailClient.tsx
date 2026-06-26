@@ -95,11 +95,11 @@ export function ProductDetailClient({
                 <ShoppingBag className="w-24 h-24 text-slate-200" />
               </div>
             )}
-            {product.discount_price > 0 && (
+            {(product.discount_price ?? 0) > 0 && (
               <div className="absolute top-4 left-4">
                 <span className="px-3 py-1.5 bg-red-500 text-white text-xs font-bold rounded-xl shadow-lg">
                   {Math.round(
-                    ((product.price - product.discount_price) / product.price) *
+                    ((product.price - (product.discount_price || 0)) / product.price) *
                       100
                   )}
                   % OFF
@@ -122,7 +122,7 @@ export function ProductDetailClient({
               <span className="text-3xl font-black text-primary">
                 {formatRupiah(effectivePrice)}
               </span>
-              {product.discount_price > 0 && (
+              {(product.discount_price ?? 0) > 0 && (
                 <span className="text-lg text-muted line-through">
                   {formatRupiah(product.price)}
                 </span>

@@ -106,7 +106,9 @@ export default async function TokoPage({
                           <div className="font-medium text-slate-900 flex items-center gap-2">
                             {product.name}
                             {product.is_featured && (
-                              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" title="Produk Unggulan" />
+                              <span title="Produk Unggulan">
+                                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                              </span>
                             )}
                           </div>
                           <div className="text-xs text-slate-500 mt-0.5">{product.category} • Stok: {product.stock}</div>
@@ -115,7 +117,7 @@ export default async function TokoPage({
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-slate-900 font-medium">{product.expand?.store?.name || "-"}</div>
-                      <div className="text-xs text-slate-500 mt-0.5">{product.expand?.store?.owner_phone || "-"}</div>
+                          <div className="text-[10px] text-slate-500 mt-0.5">{product.expand?.store?.phone || "-"}</div>
                     </td>
                     <td className="px-6 py-4">
                       {product.discount_price ? (

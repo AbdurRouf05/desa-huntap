@@ -117,10 +117,10 @@ export function TokoClient({ products, categories }: { products: Product[], cate
                           <ShoppingBag className="w-12 h-12 text-slate-200 group-hover:text-primary/30 transition-colors" />
                         </div>
                       )}
-                      {product.discount_price > 0 && (
+                      {(product.discount_price ?? 0) > 0 && (
                         <div className="absolute top-3 left-3">
                           <span className="px-2.5 py-1 bg-red-500 text-white text-[10px] font-bold rounded-lg shadow-lg">
-                            {Math.round(((product.price - product.discount_price) / product.price) * 100)}% OFF
+                            {Math.round(((product.price - (product.discount_price || 0)) / product.price) * 100)}% OFF
                           </span>
                         </div>
                       )}
@@ -151,7 +151,7 @@ export function TokoClient({ products, categories }: { products: Product[], cate
                         <span className="text-lg font-black text-primary">
                           {formatRupiah(product.discount_price || product.price)}
                         </span>
-                        {product.discount_price > 0 && (
+                        {(product.discount_price ?? 0) > 0 && (
                           <span className="text-xs text-muted line-through">
                             {formatRupiah(product.price)}
                           </span>

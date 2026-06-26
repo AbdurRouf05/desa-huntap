@@ -93,7 +93,7 @@ export default function TambahProdukPage() {
                 >
                   <option value="">-- Pilih Toko UMKM --</option>
                   {dummyUmkmStores.map(store => (
-                    <option key={store.id} value={store.id}>{store.name} (Pemilik: {store.ownerName})</option>
+                    <option key={store.id} value={store.id}>{store.name} (Pemilik: {store.owner_name})</option>
                   ))}
                 </select>
                 <p className="text-xs text-slate-500 mt-1">

@@ -67,7 +67,7 @@ export default function EditBeritaPage() {
               <label className="text-sm font-bold text-slate-700">Tanggal Publikasi <span className="text-red-500">*</span></label>
               <input 
                 type="date" 
-                defaultValue={article.createdAt}
+                defaultValue={article.created}
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none text-slate-800"
               />
             </div>
@@ -127,7 +127,7 @@ export default function EditBeritaPage() {
         {/* Action Buttons */}
         <div className="p-6 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <input type="checkbox" id="publish" className="w-4 h-4 text-primary rounded border-slate-300 focus:ring-primary" defaultChecked={article.isPublished} />
+            <input type="checkbox" id="publish" className="w-4 h-4 text-primary rounded border-slate-300 focus:ring-primary" defaultChecked={article.is_published} />
             <label htmlFor="publish" className="text-sm font-medium text-slate-700">Publikasikan Berita</label>
           </div>
           
