@@ -36,7 +36,7 @@ function StatsSection() {
   ];
 
   return (
-    <section className="relative z-20 px-4 sm:px-6 mt-0 md:-mt-16">
+    <section className="relative z-20 px-4 sm:px-6 mt-8 md:-mt-16">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {stats.map((stat, idx) => (

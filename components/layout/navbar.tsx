@@ -51,7 +51,7 @@ export function Navbar() {
               <div className="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-105">
                 <Image src="/logo-lumajang-2.png" alt="Logo Lumajang" width={40} height={40} className="w-full h-full object-contain" />
               </div>
-              <div className="hidden sm:block">
+              <div className="block">
                 <p className="font-bold text-slate-800 text-sm leading-tight">
                   Desa Sumbermujur
                 </p>
