@@ -3,11 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { WhatsAppFloat } from "@/components/layout/wa-float";
-import { CartProvider } from "@/components/providers/cart-provider";
-import { CartDrawer } from "@/components/toko/cart-drawer";
+// public layout components have been moved to app/(public)/layout.tsx
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -43,13 +39,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen flex flex-col antialiased`} suppressHydrationWarning>
-        <CartProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
-          <CartDrawer />
-        </CartProvider>
+        {children}
       </body>
     </html>
   );

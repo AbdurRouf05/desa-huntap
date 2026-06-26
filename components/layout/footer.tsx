@@ -13,7 +13,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 flex items-center justify-center transition-transform hover:scale-105">
-                <Image src="/logo-lumajang.png" alt="Logo Lumajang" width={40} height={40} className="w-full h-full object-contain" />
+                <Image src="/logo-lumajang-2.png" alt="Logo Lumajang" width={40} height={40} className="w-full h-full object-contain" />
               </div>
               <div>
                 <p className="font-bold text-white text-sm">Desa Sumbermujur</p>
@@ -187,8 +187,8 @@ export function Footer() {
           <p className="text-xs text-slate-500 text-center sm:text-left">
             © {new Date().getFullYear()} Desa Huntap Sumbermujur. Hak cipta dilindungi.
           </p>
-          <p className="text-xs text-slate-500 flex items-center gap-1">
-            Dibuat dengan <Heart className="w-3 h-3 text-red-400 fill-red-400" /> untuk Desa Sumbermujur
+          <p className="text-sm text-slate-500">
+            Dibuat oleh Rouf
           </p>
         </div>
       </div>

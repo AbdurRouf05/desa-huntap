@@ -4,14 +4,16 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingCart, ChevronDown } from "lucide-react";
+import { Menu, X, ShoppingCart, ChevronDown, Search } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/providers/cart-provider";
+import { GlobalSearch } from "@/components/layout/global-search";
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { items } = useCart();
   const cartCount = items.reduce((sum, item) => sum + item.qty, 0);
@@ -25,6 +27,12 @@ export function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleOpenSearch = () => setIsSearchOpen(true);
+    document.addEventListener("open-global-search", handleOpenSearch);
+    return () => document.removeEventListener("open-global-search", handleOpenSearch);
+  }, []);
 
   return (
     <>
@@ -41,7 +49,7 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group shrink-0">
               <div className="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-105">
-                <Image src="/logo-lumajang.png" alt="Logo Lumajang" width={40} height={40} className="w-full h-full object-contain" />
+                <Image src="/logo-lumajang-2.png" alt="Logo Lumajang" width={40} height={40} className="w-full h-full object-contain" />
               </div>
               <div className="hidden sm:block">
                 <p className="font-bold text-slate-800 text-sm leading-tight">
@@ -74,6 +82,15 @@ export function Navbar() {
 
             {/* Right Side: Cart + Mobile Toggle */}
             <div className="flex items-center gap-2">
+              {/* Search Button */}
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors hidden sm:block"
+                title="Cari (Ctrl+K)"
+              >
+                <Search className="w-5 h-5 text-slate-600" />
+              </button>
+
               {/* Cart Button */}
               <Link
                 href="/toko"
@@ -139,6 +156,9 @@ export function Navbar() {
           onClick={() => setMobileOpen(false)}
         />
       )}
+
+      {/* Global Search Component */}
+      <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
 }

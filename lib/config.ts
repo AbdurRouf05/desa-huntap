@@ -11,7 +11,7 @@ export const siteConfig = {
   email: "desa.sumbermujur@gmail.com",
   phone: "(0334) 123456",
   address: "Jl. Raya Sumbermujur, Kec. Candipuro, Kab. Lumajang, Jawa Timur 67354",
-  mapEmbedUrl: "https://maps.google.com/maps?q=Bumi+Semeru+Damai+Sumbermujur+Lumajang&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  mapEmbedUrl: "https://maps.google.com/maps?q=-8.1300847,113.0184505&t=m&z=17&ie=UTF8&iwloc=B&output=embed",
   social: {
     facebook: "https://facebook.com/desasumbermujur",
     instagram: "https://instagram.com/desasumbermujur",
@@ -26,6 +26,7 @@ export const navLinks = [
   { href: "/layanan", label: "Layanan" },
   { href: "/berita", label: "Berita" },
   { href: "/galeri", label: "Galeri" },
+  { href: "/museum", label: "Museum" },
   { href: "/toko", label: "Toko UMKM" },
   { href: "/kontak", label: "Kontak" },
 ];
