@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Upload, Save, Eye } from "lucide-react";
 import { dummyNewsCategories } from "@/lib/dummy-data";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 export default function TambahBeritaPage() {
   return (
@@ -57,14 +58,7 @@ export default function TambahBeritaPage() {
           {/* Thumbnail */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Gambar Utama (Thumbnail) <span className="text-red-500">*</span></label>
-            <label htmlFor="thumbnail-upload" className="border-2 border-dashed border-slate-300 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors cursor-pointer group w-full block">
-              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform mx-auto">
-                <Upload className="w-8 h-8 text-slate-400" />
-              </div>
-              <p className="text-sm font-medium text-slate-700 mb-1">Klik untuk unggah gambar</p>
-              <p className="text-xs text-slate-500">Maksimal ukuran 2MB (JPG, PNG)</p>
-              <input id="thumbnail-upload" type="file" className="sr-only" accept="image/*" />
-            </label>
+            <ImageUpload id="thumbnail-upload" />
           </div>
 
           {/* Konten */}

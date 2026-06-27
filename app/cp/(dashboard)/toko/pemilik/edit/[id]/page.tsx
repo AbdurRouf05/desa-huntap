@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Save, MapPin, Phone, User, Store } from "lucide-react";
 import { useParams } from "next/navigation";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 export default function EditPemilikPage() {
   const params = useParams();

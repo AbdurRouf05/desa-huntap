@@ -1,4 +1,5 @@
 import { PB_URL } from '@/lib/pocketbase';
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { Upload, Trash2, Search, Image as ImageIcon } from "lucide-react";
 import { galleryService } from "@/lib/services/gallery.service";
 
@@ -27,14 +28,7 @@ export default async function GaleriPage({
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-200 p-6">
-        <label htmlFor="galeri-upload" className="border-2 border-dashed border-slate-300 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors cursor-pointer group mb-8 w-full block">
-          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform mx-auto">
-            <Upload className="w-8 h-8 text-primary" />
-          </div>
-          <p className="text-base font-bold text-slate-800 mb-1">Unggah Foto Baru (WIP)</p>
-          <p className="text-sm text-slate-500">Fitur unggah sedang dikembangkan. Klik untuk memilih gambar.</p>
-          <input id="galeri-upload" type="file" className="sr-only" accept="image/*" />
-        </label>
+        <ImageUpload id="galeri-upload" />
 
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-bold text-slate-800">Koleksi Foto ({filteredData.length})</h2>

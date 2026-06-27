@@ -6,6 +6,7 @@ import { ArrowLeft, Upload, Save, Eye, Printer, QrCode } from "lucide-react";
 import { dummyMuseumItems } from "@/lib/dummy-data";
 import { useEffect, useState, useRef } from "react";
 import QRCode from "react-qr-code";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 export default function EditMuseumItemPage() {
   const params = useParams();
@@ -185,27 +186,7 @@ export default function EditMuseumItemPage() {
               {/* Thumbnail */}
               <div className="bg-white rounded-2xl border border-slate-200 p-6">
                 <label className="text-sm font-bold text-slate-700 block mb-4">Foto Artefak</label>
-                <label htmlFor="artefak-upload" className="border-2 border-dashed border-slate-300 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors cursor-pointer group relative overflow-hidden h-48 w-full block">
-                    {item.image ? (
-                        <div className="absolute inset-0">
-                        <img src={item.image} alt="Thumbnail" className="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition-opacity" />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-2 shadow-sm mx-auto">
-                            <Upload className="w-5 h-5 text-slate-700" />
-                            </div>
-                            <p className="text-xs font-bold text-slate-800">Ubah Foto</p>
-                        </div>
-                        </div>
-                    ) : (
-                        <>
-                        <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform mx-auto">
-                            <Upload className="w-6 h-6 text-slate-400" />
-                        </div>
-                        <p className="text-xs font-medium text-slate-700">Unggah Foto Baru</p>
-                        </>
-                    )}
-                    <input id="artefak-upload" type="file" className="sr-only" accept="image/*" />
-                </label>
+                <ImageUpload id="artefak-upload" />
               </div>
           </div>
       </div>
