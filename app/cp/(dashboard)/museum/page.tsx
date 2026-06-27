@@ -4,7 +4,7 @@ import { Plus, Search, Edit, QrCode } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { museumService } from "@/lib/services/museum.service";
 import { DeleteButton } from "@/components/admin/DeleteButton";
-import { deleteMuseumItemAction } from "@/lib/actions/museum.actions";
+import { deleteMuseumItem } from "@/lib/actions/museum.actions";
 
 export const dynamic = "force-dynamic";
 
@@ -129,7 +129,7 @@ export default async function MuseumAdminPage({
                                                     >
                                                         <Edit className="w-4 h-4" />
                                                     </Link>
-                                                    <DeleteButton id={item.id} onDelete={deleteMuseumItemAction} />
+                                                    <DeleteButton id={item.id} onDelete={deleteMuseumItem} />
                                                 </div>
                                             </td>
                                         </tr>

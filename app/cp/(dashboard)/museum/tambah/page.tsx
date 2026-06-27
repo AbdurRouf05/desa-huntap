@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
 import { ImageUpload } from "@/components/admin/ImageUpload";
-import { museumService } from "@/lib/services/museum.service";
+import { createMuseumItem } from "@/lib/actions/museum.actions";
+import { useToast } from "@/components/ui/Toast";
 
 export default function TambahMuseumItemPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,17 +22,22 @@ export default function TambahMuseumItemPage() {
     try {
       const formData = new FormData(e.currentTarget);
       
-      // Auto-generate slug from name if not provided
-      const name = formData.get("name") as string;
-      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
-      formData.append("slug", slug);
+      const result = await createMuseumItem(formData);
+      
+      if (!result.success) {
+        setError(result.error || "Terjadi kesalahan saat menyimpan data");
+        showToast(result.error || "Gagal menyimpan data", "error");
+        return;
+      }
 
-      await museumService.create(formData);
+      showToast("Koleksi berhasil ditambahkan! 🎉", "success");
       router.push("/cp/museum");
       router.refresh();
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Terjadi kesalahan saat menyimpan data");
+      const msg = err.message || "Terjadi kesalahan saat menyimpan data";
+      setError(msg);
+      showToast(msg, "error");
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +122,7 @@ export default function TambahMuseumItemPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
             >
                 {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                 {isLoading ? "Menyimpan..." : "Simpan & Generate QR"}

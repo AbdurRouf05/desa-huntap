@@ -6,13 +6,16 @@ import { ArrowLeft, Save, Printer, QrCode, Loader2 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import QRCode from "react-qr-code";
 import { ImageUpload } from "@/components/admin/ImageUpload";
-import { museumService } from "@/lib/services/museum.service";
+import { getMuseumItem, updateMuseumItem } from "@/lib/actions/museum.actions";
+import { PB_URL } from "@/lib/pocketbase";
+import { useToast } from "@/components/ui/Toast";
 import type { MuseumItem } from "@/types";
 
 export default function EditMuseumItemPage() {
   const params = useParams();
   const router = useRouter();
   const itemId = params.id as string;
+  const { showToast } = useToast();
   
   const [item, setItem] = useState<MuseumItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,14 +28,16 @@ export default function EditMuseumItemPage() {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const data = await museumService.getById(itemId);
-        setItem(data);
-        
-        // Construct the absolute URL for the QR code
-        if (typeof window !== 'undefined') {
+        const result = await getMuseumItem(itemId);
+        if (result.success && result.data) {
+          setItem(result.data as MuseumItem);
+          
+          if (typeof window !== 'undefined') {
             const baseUrl = window.location.origin;
-            // Arahkan QR code ke halaman detail di sisi publik
-            setQrValue(`${baseUrl}/museum/${data.slug}`);
+            setQrValue(`${baseUrl}/museum/${result.data.slug}`);
+          }
+        } else {
+          setError("Gagal memuat data artefak.");
         }
       } catch (err: any) {
         console.error(err);
@@ -86,18 +91,22 @@ export default function EditMuseumItemPage() {
     try {
       const formData = new FormData(e.currentTarget);
       
-      // Jika user tidak memilih file baru, hapus 'image' dari formData agar PocketBase tidak menimpa dengan file kosong
-      const imageFile = formData.get("image") as File;
-      if (imageFile && imageFile.size === 0) {
-        formData.delete("image");
+      const result = await updateMuseumItem(itemId, formData);
+      
+      if (!result.success) {
+        setError(result.error || "Terjadi kesalahan saat menyimpan data");
+        showToast(result.error || "Gagal menyimpan perubahan", "error");
+        return;
       }
 
-      await museumService.update(itemId, formData);
+      showToast("Perubahan berhasil disimpan! ✅", "success");
       router.push("/cp/museum");
       router.refresh();
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Terjadi kesalahan saat menyimpan data");
+      const msg = err.message || "Terjadi kesalahan saat menyimpan data";
+      setError(msg);
+      showToast(msg, "error");
     } finally {
       setIsSaving(false);
     }
@@ -120,7 +129,9 @@ export default function EditMuseumItemPage() {
     );
   }
 
-  const defaultImageUrl = item && item.image ? museumService.getImageUrl(item) : undefined;
+  const defaultImageUrl = item && item.image 
+    ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${item.image}`
+    : undefined;
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-20">
@@ -140,7 +151,7 @@ export default function EditMuseumItemPage() {
           <div className="flex items-center gap-3">
               <button 
                 onClick={handlePrintQR}
-                className="px-6 py-3 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition-colors flex items-center gap-2 shadow-sm"
+                className="px-6 py-3 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition-colors flex items-center gap-2 shadow-sm cursor-pointer"
               >
                   <Printer className="w-5 h-5" />
                   Cetak QR Code
@@ -149,7 +160,7 @@ export default function EditMuseumItemPage() {
                 form="edit-museum-form"
                 type="submit"
                 disabled={isSaving}
-                className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm disabled:opacity-70"
+                className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-sm disabled:opacity-70 cursor-pointer"
               >
                   {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                   {isSaving ? "Menyimpan..." : "Simpan Perubahan"}
@@ -235,6 +246,7 @@ export default function EditMuseumItemPage() {
                           <div className="w-[150px] h-[150px] bg-slate-200 animate-pulse rounded-xl" />
                       )}
                   </div>
+                  
                   <p className="text-xs text-slate-500">
                       Cetak QR Code ini dan tempelkan di dekat artefak fisik di museum agar pengunjung dapat memindainya.
                   </p>
