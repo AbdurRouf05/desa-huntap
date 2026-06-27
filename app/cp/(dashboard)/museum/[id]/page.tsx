@@ -73,7 +73,12 @@ export default function EditMuseumItemPage() {
                             <p style="margin-top: 2rem; font-size: 0.8rem; font-weight: bold;">Scan untuk membaca sejarahnya</p>
                         </div>
                         <script>
-                            window.onload = () => { window.print(); window.close(); }
+                            window.onload = () => { 
+                                window.print(); 
+                            }
+                            window.onafterprint = () => {
+                                window.close();
+                            }
                         </script>
                     </body>
                 </html>
