@@ -1,8 +1,10 @@
 import { PB_URL } from '@/lib/pocketbase';
 import Link from "next/link";
-import { Plus, Search, Edit, Trash2, QrCode } from "lucide-react";
+import { Plus, Search, Edit, QrCode } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { museumService } from "@/lib/services/museum.service";
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import { deleteMuseumItemAction } from "@/lib/actions/museum.actions";
 
 export const dynamic = "force-dynamic";
 
@@ -127,12 +129,7 @@ export default async function MuseumAdminPage({
                                                     >
                                                         <Edit className="w-4 h-4" />
                                                     </Link>
-                                                    <button
-                                                        className="p-2 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all"
-                                                        title="Hapus"
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </button>
+                                                    <DeleteButton id={item.id} onDelete={deleteMuseumItemAction} />
                                                 </div>
                                             </td>
                                         </tr>
