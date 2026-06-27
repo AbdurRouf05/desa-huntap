@@ -4,41 +4,47 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const hostname = request.headers.get('host') || '';
-
-  // Deteksi jika diakses melalui subdomain cp.* (misal cp.localhost:3001 atau cp.domaindesa.id)
-  const isCpSubdomain = hostname.startsWith('cp.');
   const pathname = url.pathname;
 
   // Cek Auth Cookie
   const hasAuthCookie = request.cookies.has('cp_auth');
 
-  // Jika mengakses subdomain CP
+  // Deteksi jika diakses melalui subdomain cp.* (misal cp.localhost:3001)
+  const isCpSubdomain = hostname.startsWith('cp.');
+
+  // === Akses via subdomain cp.* ===
   if (isCpSubdomain) {
     const isLoginPage = pathname === '/login';
 
-    // 1. Enforce Login (Jika belum login & bukan di halaman login)
     if (!hasAuthCookie && !isLoginPage) {
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
 
-    // 2. Redirect jika sudah login tapi mengakses halaman login
     if (hasAuthCookie && isLoginPage) {
       url.pathname = '/';
       return NextResponse.redirect(url);
     }
 
-    // 3. Rewrite URL ke folder app/cp
-    // Jika user mengakses cp.localhost:3001/berita, kita arahkan ke file app/cp/berita/page.tsx
     if (!pathname.startsWith('/cp')) {
       url.pathname = `/cp${pathname === '/' ? '' : pathname}`;
       return NextResponse.rewrite(url);
     }
-  } else {
-    // Jika mengakses domain utama (publik)
-    // Cegah akses langsung ke /cp dari domain utama agar konsisten harus via subdomain
-    if (pathname.startsWith('/cp')) {
-      url.pathname = '/';
+  }
+
+  // === Akses via domain utama ke /cp/* ===
+  if (pathname.startsWith('/cp')) {
+    const isLoginPage = pathname === '/cp/login';
+
+    // Jika belum login & bukan di halaman login, redirect ke login
+    if (!hasAuthCookie && !isLoginPage) {
+      url.pathname = '/cp/login';
+      return NextResponse.redirect(url);
+    }
+
+    // Jika sudah login tapi mengakses halaman login, redirect ke dashboard
+    if (hasAuthCookie && isLoginPage) {
+      url.pathname = '/cp';
       return NextResponse.redirect(url);
     }
   }
