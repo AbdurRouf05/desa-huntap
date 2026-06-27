@@ -24,7 +24,7 @@ export default function LoginPage() {
     
     if (result.success) {
       // Force hard navigation to reload cookies state
-      window.location.href = "/";
+      window.location.href = "/cp";
     } else {
       setError(result.error || "Gagal login, periksa kembali email dan password Anda.");
       setIsLoading(false);
