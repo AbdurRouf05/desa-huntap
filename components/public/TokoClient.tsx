@@ -14,7 +14,8 @@ export function TokoClient({ products, categories }: { products: Product[], cate
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = products.filter((p) => {
-    const matchCategory = activeCategory === "Semua" || p.category === activeCategory;
+    const categoryName = p.expand?.category?.name || "Lainnya";
+    const matchCategory = activeCategory === "Semua" || categoryName === activeCategory;
     const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCategory && matchSearch;
   });
@@ -143,7 +144,7 @@ export function TokoClient({ products, categories }: { products: Product[], cate
                     {/* Info */}
                     <div className="p-4 flex-1 flex flex-col">
                       <span className="text-[10px] font-bold text-muted uppercase tracking-wider">
-                        {product.category}
+                        {product.expand?.category?.name || "Lainnya"}
                       </span>
                       <h3 className="font-bold text-slate-800 text-sm mt-1 line-clamp-2 group-hover:text-primary transition-colors">
                         {product.name}

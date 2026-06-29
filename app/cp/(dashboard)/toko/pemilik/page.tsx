@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Plus, Search, Edit, Trash2, ShieldCheck, ShieldAlert, Store } from "lucide-react";
 import { storeService } from "@/lib/services/store.service";
+import DeleteTokoButton from "./DeleteTokoButton";
 
 export const dynamic = "force-dynamic";
 
@@ -108,9 +109,7 @@ export default async function PemilikUmkmPage({
                       <Link href={`/cp/toko/pemilik/edit/${store.id}`} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
                         <Edit className="w-4 h-4" />
                       </Link>
-                      <button className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <DeleteTokoButton id={store.id} />
                     </div>
                   </td>
                 </tr>

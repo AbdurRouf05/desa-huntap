@@ -21,6 +21,7 @@ import { desaProfile } from "@/lib/dummy-data";
 import HeroSlider from "@/components/public/HeroSlider";
 import { newsService } from "@/lib/services/news.service";
 import { storeService } from "@/lib/services/store.service";
+import { productService } from "@/lib/services/product.service";
 
 export const dynamic = "force-dynamic";
 
@@ -150,8 +151,8 @@ function FeaturedStores({ stores }: { stores: any[] }) {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stores.map((store) => {
-            const imageUrl = store.avatar
-              ? `${PB_URL}/api/files/${store.collectionId}/${store.id}/${store.avatar}?thumb=300x300f`
+            const imageUrl = store.image
+              ? `${PB_URL}/api/files/${store.collectionId}/${store.id}/${store.image}?thumb=300x300f`
               : null;
 
             return (
@@ -195,6 +196,103 @@ function FeaturedStores({ stores }: { stores: any[] }) {
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/25"
           >
             Lihat Semua Toko <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// FEATURED PRODUCTS
+// ============================================================
+function FeaturedProducts({ products }: { products: any[] }) {
+  if (!products || products.length === 0) return null;
+
+  return (
+    <section className="py-20 px-4 sm:px-6 bg-slate-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest">
+              Etalase Desa
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-800 mt-2">
+              Produk UMKM Pilihan
+            </h2>
+          </div>
+          <Link
+            href="/toko/produk"
+            className="hidden sm:flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all"
+          >
+            Lihat Semua Produk <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {products.map((product) => {
+            const imageUrl = product.images && product.images.length > 0
+              ? `${PB_URL}/api/files/${product.collectionId}/${product.id}/${product.images[0]}?thumb=300x300f`
+              : null;
+
+            return (
+              <Link
+                key={product.id}
+                href={`/toko/produk/${product.id}`}
+                className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+              >
+                <div className="aspect-square bg-slate-50 relative overflow-hidden">
+                  {imageUrl ? (
+                    <Image 
+                      src={imageUrl} 
+                      alt={product.name} 
+                      fill 
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <ShoppingBag className="w-12 h-12 text-slate-200" />
+                    </div>
+                  )}
+                  {(product.discount_price ?? 0) > 0 && (
+                    <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                      Diskon
+                    </div>
+                  )}
+                </div>
+                <div className="p-4 flex-1 flex flex-col">
+                  <h3 className="font-bold text-slate-800 text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                    {product.name}
+                  </h3>
+                  <div className="mt-auto pt-2">
+                    {product.discount_price && product.discount_price > 0 ? (
+                      <div>
+                        <span className="text-[10px] text-muted line-through mr-2">
+                          {formatRupiah(product.price)}
+                        </span>
+                        <span className="text-sm font-bold text-emerald-600 block">
+                          {formatRupiah(product.discount_price)}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-sm font-bold text-emerald-600 block">
+                        {formatRupiah(product.price)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 text-center sm:hidden">
+          <Link
+            href="/toko/produk"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/25"
+          >
+            Lihat Semua Produk <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
@@ -360,6 +458,7 @@ export default async function HomePage() {
   // Fetch real data from PocketBase
   const newsData = await newsService.getList(1, 3);
   const storeData = await storeService.getList(1, 4);
+  const productData = await productService.getList(1, 4);
 
   return (
     <>
@@ -367,6 +466,7 @@ export default async function HomePage() {
       <StatsSection />
       <AboutSection />
       <FeaturedStores stores={storeData.items} />
+      <FeaturedProducts products={productData.items} />
       <LatestNews newsList={newsData.items} />
       <MapSection />
     </>

@@ -2,6 +2,7 @@ import { PB_URL } from '@/lib/pocketbase';
 import Link from "next/link";
 import { Plus, Search, Edit, Trash2, Store, Star } from "lucide-react";
 import { productService } from "@/lib/services/product.service";
+import { productCategoryService } from "@/lib/services/product-category.service";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ export default async function TokoPage({
   const category = searchParams.category || "";
 
   const data = await productService.getList(page, 15, search, category);
+  const categories = await productCategoryService.getActiveCategories();
 
   return (
     <div className="space-y-6">
@@ -54,10 +56,9 @@ export default async function TokoPage({
               className="w-full sm:w-auto px-4 py-2 border border-slate-300 rounded-l-xl text-sm outline-none focus:border-emerald-500"
             >
               <option value="">Semua Kategori</option>
-              <option value="makanan">Makanan</option>
-              <option value="minuman">Minuman</option>
-              <option value="kerajinan">Kerajinan</option>
-              <option value="pertanian">Pertanian</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
             </select>
             <button type="submit" className="px-4 py-2 bg-emerald-600 text-white rounded-r-xl text-sm font-medium hover:bg-emerald-700">
               Filter
@@ -112,7 +113,7 @@ export default async function TokoPage({
                               </span>
                             )}
                           </div>
-                          <div className="text-xs text-slate-500 mt-0.5">{product.category} • Stok: {product.stock}</div>
+                          <div className="text-xs text-slate-500 mt-0.5">{product.expand?.category?.name || "Lainnya"} • Stok: {product.stock}</div>
                         </div>
                       </div>
                     </td>

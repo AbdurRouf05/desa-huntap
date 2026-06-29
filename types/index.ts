@@ -18,6 +18,12 @@ export interface NewsCategory extends PBRecord {
   is_active: boolean;
 }
 
+export interface ProductCategory extends PBRecord {
+  name: string;
+  slug: string;
+  is_active: boolean;
+}
+
 export interface NewsArticle extends PBRecord {
   title: string;
   slug: string;
@@ -51,7 +57,7 @@ export interface Product extends PBRecord {
   description: string;
   price: number;
   discount_price?: number;
-  category: string; // select: Makanan/Minuman/Kerajinan/Pertanian
+  category: string; // relation ID → product_categories
   images: string[]; // array of filenames
   stock: number;
   is_featured: boolean;
@@ -59,6 +65,7 @@ export interface Product extends PBRecord {
   // expand
   expand?: {
     store?: UmkmStore;
+    category?: ProductCategory;
   };
 }
 

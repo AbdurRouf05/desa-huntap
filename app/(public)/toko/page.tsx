@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { productService } from "@/lib/services/product.service";
+import { productCategoryService } from "@/lib/services/product-category.service";
 import { TokoClient } from "@/components/public/TokoClient";
 
 export const metadata: Metadata = {
@@ -14,9 +15,10 @@ export default async function TokoPage() {
   const result = await productService.getList(1, 100);
   const products = result.items || [];
 
-  // Extract unique categories from products
-  const uniqueCategories = Array.from(new Set(products.map((p) => p.category).filter(Boolean)));
-  const categories = ["Semua", ...uniqueCategories];
+  // Fetch active categories
+  const activeCategories = await productCategoryService.getActiveCategories();
+  const categoryNames = activeCategories.map(c => c.name);
+  const categories = ["Semua", ...categoryNames];
 
   return <TokoClient products={products} categories={categories} />;
 }

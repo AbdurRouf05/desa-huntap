@@ -35,6 +35,7 @@ const menuGroups = [
     title: "Pariwisata & UMKM",
     items: [
       { name: "Toko UMKM", icon: Store, href: "/cp/toko" },
+      { name: "Kategori Produk", icon: Store, href: "/cp/kategori-produk" },
       { name: "Pesanan Toko", icon: Store, href: "/cp/toko/pesanan" },
       { name: "Pemilik UMKM", icon: Users, href: "/cp/toko/pemilik" },
       { name: "Museum Desa", icon: ImageIcon, href: "/cp/museum" },

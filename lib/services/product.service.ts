@@ -18,7 +18,7 @@ export const productService = {
 
     return await pb.collection(COLLECTION).getList<Product>(page, perPage, {
       sort: "-created",
-      expand: "store",
+      expand: "store,category",
       filter: filters.length > 0 ? filters.join(" && ") : undefined,
     });
   },
@@ -28,7 +28,7 @@ export const productService = {
     const result = await pb.collection(COLLECTION).getList<Product>(1, limit, {
       filter: "is_featured = true",
       sort: "-created",
-      expand: "store",
+      expand: "store,category",
     });
     return result.items;
   },
@@ -37,14 +37,14 @@ export const productService = {
   async getBySlug(slug: string): Promise<Product> {
     return await pb.collection(COLLECTION).getFirstListItem<Product>(
       `slug = "${slug}"`,
-      { expand: "store" }
+      { expand: "store,category" }
     );
   },
 
   /** Get product by ID */
   async getById(id: string): Promise<Product> {
     return await pb.collection(COLLECTION).getOne<Product>(id, {
-      expand: "store",
+      expand: "store,category",
     });
   },
 
@@ -53,6 +53,7 @@ export const productService = {
     return await pb.collection(COLLECTION).getFullList<Product>({
       filter: `store = "${storeId}"`,
       sort: "-created",
+      expand: "store,category",
     });
   },
 

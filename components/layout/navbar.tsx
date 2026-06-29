@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingCart, ChevronDown, Search } from "lucide-react";
+import { Menu, X, ShoppingCart, ChevronDown, Search, Store } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/providers/cart-provider";
@@ -95,6 +95,7 @@ export function Navbar() {
               <Link
                 href="/toko"
                 className="relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors"
+                title="Keranjang Belanja"
               >
                 <ShoppingCart className="w-5 h-5 text-slate-600" />
                 {cartCount > 0 && (
@@ -102,6 +103,14 @@ export function Navbar() {
                     {cartCount}
                   </span>
                 )}
+              </Link>
+
+              {/* Login Mitra Toko */}
+              <Link
+                href="/toko/login"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-xl text-sm font-semibold transition-colors"
+              >
+                Mitra Toko
               </Link>
 
               {/* Mobile Menu Toggle */}
@@ -122,26 +131,38 @@ export function Navbar() {
         {/* Mobile Menu */}
         <div
           className={cn(
-            "lg:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-slate-100",
-            mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            "lg:hidden transition-all duration-300 ease-in-out border-t border-slate-100 bg-white",
+            mobileOpen ? "max-h-[calc(100vh-4rem)] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 overflow-hidden"
           )}
         >
-          <div className="bg-white px-4 py-3 space-y-1 shadow-lg">
+          <div className="px-4 py-3 space-y-0.5 shadow-inner">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "block px-4 py-3 rounded-xl text-sm font-medium transition-all",
+                  "block px-4 py-2.5 rounded-xl text-sm font-medium transition-all",
                   pathname === link.href ||
                     (link.href !== "/" && pathname.startsWith(link.href))
                     ? "text-primary bg-primary/10 font-semibold"
                     : "text-slate-600 hover:text-primary hover:bg-slate-50"
                 )}
+                onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
+            
+            <div className="pt-3 mt-2 border-t border-slate-100 pb-2">
+              <Link
+                href="/toko/login"
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-xl text-sm font-semibold transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Store className="w-4 h-4" />
+                Masuk Mitra Toko
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
