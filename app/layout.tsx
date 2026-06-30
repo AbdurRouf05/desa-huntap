@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "Desa Huntap Sumbermujur",
+    "HuntapSemeru",
     "Desa Sumbermujur",
     "Huntap Lumajang",
     "Candipuro",
